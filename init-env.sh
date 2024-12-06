@@ -1,12 +1,13 @@
 echo 'Устанавливаем homebrew'
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+input="applications"
+while IFS= read -r app
+do
+    echo "brew install $app"
+    brew install "$app"
+done < "$input"
 
-applications=("intellij-idea" "postman" "postgresql@14" "datagrip" "docker" "docker-compose" "maven" "openjdk@17" "google-chrome")
-for app in "${applications[@]}"; do
-  echo "brew install $app"
-  brew install "$app"
-done
 
 current_username=$(id -un)
 echo "Текущий пользователь $current_username"
